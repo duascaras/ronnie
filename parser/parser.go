@@ -9,14 +9,19 @@ import (
 
 type Parser struct {
 	l *lexer.Lexer
-
 	errors []string
-	// Instead of pointing to the cur/next character, 
-	// they will point to the cur/next TOKEN.
-	// This happens in the nextToken() helper function bellow.
-	curToken token.Token
+
+	curToken token.Token // they will point to the cur/next TOKEN.
 	peekToken token.Token
+
+	prefixParseFns map[token.TokenType]prefixParseFn
+	infixParseFns map[token.TokenType]infixParseFn
 }
+
+type (
+	prefixParseFn func() ast.Expression
+	infixParseFn func(ast.Expression) ast.Expression
+)
 
 func New(l *lexer.Lexer) *Parser {
 	p := &Parser{
@@ -120,4 +125,12 @@ func (p *Parser) curTokenIs(t token.TokenType) bool {
 
 func (p *Parser) peekTokenIs(t token.TokenType) bool {
 	return p.peekToken.Type == t
+}
+
+func (p *Parser) registerPrefix(tokenType token.TokenType, fn prefixParseFn) {
+	p.prefixParseFns[tokenType] = fn
+}
+
+func (p *Parser) registerInfix(tokenType token.TokenType, fn infixParseFn) {
+	p.infixParseFns[tokenType] = fn
 }
