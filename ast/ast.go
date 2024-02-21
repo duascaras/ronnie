@@ -126,9 +126,9 @@ func (il *IntegerLiteral) TokenLiteral() string { return il.Token.Literal }
 func (il *IntegerLiteral) String() string { return il.Token.Literal }
 
 type PrefixExpression struct {
-	Token token.Token
-	Operator string
-	Right Expression
+	Token 		token.Token
+	Operator 	string
+	Right 		Expression
 }
 
 func (pe *PrefixExpression) expressionNode() { }
