@@ -7,6 +7,7 @@ import (
 type ObjectType string
 
 const (
+	ERROR_OBJ		 	= "ERROR"
 	INTEGER_OBJ 		= "INTEGER"
 	BOOLEAN_OBJ 		= "BOOLEAN"
 	NULL_OBJ 			= "NULL"
@@ -17,6 +18,13 @@ type Object interface {
 	Type() ObjectType
 	Inspect() string
 }
+
+type Error struct {
+	Message string
+}
+
+func (e *Error) Type() ObjectType { return ERROR_OBJ }
+func (e *Error) Inspect() string { return "ERROR: " + e.Message}
 
 type Integer struct {
 	Value int64
