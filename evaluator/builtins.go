@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"fmt"
 	"ronnie/object"
 )
 
@@ -104,6 +105,16 @@ var builtins = map[string]*object.Builtin {
 			newElements[lenght] = args[1]
 
 			return &object.Array{Elements: newElements}
+		},
+	},
+
+	"print": {
+		Fn: func(args ...object.Object) object.Object {
+			for _, arg := range args {
+				fmt.Println(arg.Inspect())
+			}
+
+			return nil
 		},
 	},
 }
