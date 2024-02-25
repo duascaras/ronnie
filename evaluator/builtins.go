@@ -19,7 +19,7 @@ var builtins = map[string]*object.Builtin {
 				return &object.Integer{Value: int64(len(arg.Value))}
 
 			default:
-				return newError("argument to `len` not supported, got=%s", args[0].Type())
+				return newError("argument to `len` not supported, got %s", args[0].Type())
 			}
 		},
 	},
@@ -70,7 +70,7 @@ var builtins = map[string]*object.Builtin {
 			}
 			
 			if args[0].Type() != object.ARRAY_OBJ {
-				return newError("argument to `last` must be ARRAY, got %s", args[0].Type())
+				return newError("argument to `rest` must be ARRAY, got %s", args[0].Type())
 			}
 
 			arr := args[0].(*object.Array)
@@ -93,7 +93,7 @@ var builtins = map[string]*object.Builtin {
 			}
 			
 			if args[0].Type() != object.ARRAY_OBJ {
-				return newError("argument to `last` must be ARRAY, got %s", args[0].Type())
+				return newError("argument to `push` must be ARRAY, got %s", args[0].Type())
 			}
 
 			arr := args[0].(*object.Array)
