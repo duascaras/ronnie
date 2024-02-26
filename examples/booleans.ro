@@ -1,0 +1,12 @@
+let boolExample = fn(x) {
+    let x = x + 2;
+    let x = x * 3;
+
+    if ( x < 10 ) {
+        return true ;
+    }
+
+    return false ;
+}
+
+print(boolExample(2))

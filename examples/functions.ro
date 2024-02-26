@@ -1,0 +1,23 @@
+let sum = fn(a, b) { return a + b; }
+
+let sub = fn(a, b) { return a - b; }
+
+let div = fn(a, b) { return a * b; }
+
+let mult = fn(a, b) { return a / b; }
+
+let sqrt = fn(n) { return n * n }
+
+let factorial = fn(n) { if (n < 2) { return 1; } else { return n * factorial(n - 1); } } 
+
+print(sum(4, 2));
+
+print(sub(4, 2));
+
+print(div(4, 2));
+
+print(mult(4, 2));
+
+print(sqrt(4, 2));
+
+print(factorial(5));
