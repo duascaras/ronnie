@@ -1,8 +1,6 @@
 let a = 5;
 let b = 0;
 
-if ( a == 5 ) {
-    b = 3;
-}
+if ( a == 5 ) { let b = 3; }
 
 print(b)

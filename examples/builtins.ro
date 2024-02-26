@@ -1,0 +1,19 @@
+len("Hello World!")
+
+let myArray = ["Duas", "Caras", 23, fn(x) { x * x }];
+
+myArray[0]
+myArray[1]
+myArray[2]
+myArray[3]
+myArray[4]
+
+let newArray = ["Gon", "Freecs", "OSU"];
+first(newArray)
+rest(newArray)
+last(newArray)
+push(newArray, "Killua")
+
+let myHash = {"name": "Ronaldinho", "age": 43, "nickname": "Ronnie"};
+myHash["name"]
+myHash["nickname"]
