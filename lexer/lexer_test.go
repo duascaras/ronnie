@@ -33,7 +33,7 @@ func TestNextToken(t *testing.T) {
 	`
 
 	tests := []struct {
-		expectedType token.TokenType
+		expectedType    token.TokenType
 		expectedLiteral string
 	}{
 		{token.LET, "let"},
@@ -124,8 +124,8 @@ func TestNextToken(t *testing.T) {
 		{token.RBRACE, "}"},
 		{token.EOF, ""},
 	}
-	
-	l:= New(input)
+
+	l := New(input)
 	for i, tt := range tests {
 		tok := l.NextToken()
 

@@ -750,7 +750,7 @@ func TestParsingHashLiteralsStringKeys(t *testing.T) {
 	p := New(l)
 	program := p.ParseProgram()
 	checkParserErrors(t, p)
-	
+
 	stmt := program.Statements[0].(*ast.ExpressionStatement)
 	hash, ok := stmt.Expression.(*ast.HashLiteral)
 
@@ -763,8 +763,8 @@ func TestParsingHashLiteralsStringKeys(t *testing.T) {
 	}
 
 	expected := map[string]int64{
-		"one": 1,
-		"two": 2,
+		"one":   1,
+		"two":   2,
 		"three": 3,
 	}
 
@@ -796,7 +796,7 @@ func TestParsingEmptyHashLiteral(t *testing.T) {
 	if len(hash.Pairs) != 0 {
 		t.Errorf("hash.Pairs has wrong length. got=%d", len(hash.Pairs))
 	}
-}	
+}
 
 func TestParsingHashLiteralsWithExpressions(t *testing.T) {
 	input := `{"one": 0 + 1, "two": 10 - 8, "three": 15 / 5}`
@@ -844,7 +844,6 @@ func TestParsingHashLiteralsWithExpressions(t *testing.T) {
 		testFunc(value)
 	}
 }
-
 
 func testLetStatement(t *testing.T, s ast.Statement, name string) bool {
 	if s.TokenLiteral() != "let" {
@@ -990,4 +989,3 @@ func checkParserErrors(t *testing.T, p *Parser) {
 	}
 	t.FailNow()
 }
-

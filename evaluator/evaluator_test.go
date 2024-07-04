@@ -9,8 +9,8 @@ import (
 
 func TestErrorHandling(t *testing.T) {
 	tests := []struct {
-		input 				string 
-		expectedMessage 	string
+		input           string
+		expectedMessage string
 	}{
 		{
 			"5 + true;",
@@ -35,7 +35,7 @@ func TestErrorHandling(t *testing.T) {
 		{
 			"if (10 > 1) { true + false; }",
 			"unknown operator: BOOLEAN + BOOLEAN",
-		},			
+		},
 		{
 			`
 			if (10 > 1) {
@@ -44,7 +44,7 @@ func TestErrorHandling(t *testing.T) {
 				}
 				return 1;
 				}
-			`, 
+			`,
 			"unknown operator: BOOLEAN + BOOLEAN",
 		},
 		{
@@ -92,17 +92,17 @@ func TestFunctionObject(t *testing.T) {
 	if fn.Parameters[0].String() != "x" {
 		t.Fatalf("parameter is not 'x'. got=%q", fn.Parameters[0])
 	}
-	
+
 	expectedBody := "(x + 2)"
 	if fn.Body.String() != expectedBody {
 		t.Fatalf("body is not %q. got=%q", expectedBody, fn.Body.String())
 	}
-}	
+}
 
 func TestFunctionApplication(t *testing.T) {
 	tests := []struct {
-	input string
-	expected int64
+		input    string
+		expected int64
 	}{
 		{"let identity = fn(x) { x; }; identity(5);", 5},
 		{"let identity = fn(x) { return x; }; identity(5);", 5},
@@ -130,8 +130,8 @@ func TestClosures(t *testing.T) {
 
 func TestEvalIntegerExpression(t *testing.T) {
 	tests := []struct {
-		input 		string 
-		expected 	int64
+		input    string
+		expected int64
 	}{
 		{"5", 5},
 		{"10", 10},
@@ -171,8 +171,8 @@ func TestStringLiteral(t *testing.T) {
 
 func TestLetStatements(t *testing.T) {
 	tests := []struct {
-		input 		string
-		expected 	int64
+		input    string
+		expected int64
 	}{
 		{"let a = 5; a;", 5},
 		{"let a = 5 * 5; a;", 25},
@@ -187,8 +187,8 @@ func TestLetStatements(t *testing.T) {
 
 func TestEvalBooleanExpression(t *testing.T) {
 	tests := []struct {
-		input 		string 
-		expected 	bool
+		input    string
+		expected bool
 	}{
 		{"true", true},
 		{"false", false},
@@ -219,8 +219,8 @@ func TestEvalBooleanExpression(t *testing.T) {
 
 func TestReturnStatements(t *testing.T) {
 	tests := []struct {
-		input 		string 
-		expected 	int64
+		input    string
+		expected int64
 	}{
 		{
 			`
@@ -246,8 +246,8 @@ func TestReturnStatements(t *testing.T) {
 
 func TestIfElseExpressions(t *testing.T) {
 	tests := []struct {
-		input 		string 
-		expected 	interface{}
+		input    string
+		expected interface{}
 	}{
 		{"if (true) { 10 }", 10},
 		{"if (false) { 10 }", nil},
@@ -261,7 +261,7 @@ func TestIfElseExpressions(t *testing.T) {
 	for _, tt := range tests {
 		evaluated := testEval(tt.input)
 		integer, ok := tt.expected.(int)
-		if ok { 
+		if ok {
 			testIntegerObject(t, evaluated, int64(integer))
 		} else {
 			testNullObject(t, evaluated)
@@ -271,8 +271,8 @@ func TestIfElseExpressions(t *testing.T) {
 
 func TestBangOperator(t *testing.T) {
 	tests := []struct {
-		input 		string 
-		expected 	bool
+		input    string
+		expected bool
 	}{
 		{"!true", false},
 		{"!false", true},
@@ -353,7 +353,7 @@ func TestBuiltinFunctions(t *testing.T) {
 			}
 		}
 	}
-}	
+}
 
 func TestArrayLiterals(t *testing.T) {
 	input := "[1, 2 * 2, 3 + 3]"
@@ -375,8 +375,8 @@ func TestArrayLiterals(t *testing.T) {
 
 func TestArrayIndexExpressions(t *testing.T) {
 	tests := []struct {
-		input 				string 
-		expected		 	interface{}
+		input    string
+		expected interface{}
 	}{
 		{
 			"[1, 2, 3][0]",
@@ -385,7 +385,7 @@ func TestArrayIndexExpressions(t *testing.T) {
 		{
 			"[1, 2, 3][1]",
 			2,
-			},
+		},
 		{
 			"[1, 2, 3][2]",
 			3,
@@ -534,7 +534,7 @@ func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 	}
 	if result.Value != expected {
 		t.Errorf("object has wrong value. got=%d, want=%d",
-		result.Value, expected)
+			result.Value, expected)
 		return false
 	}
 
@@ -550,7 +550,7 @@ func testBooleanObject(t *testing.T, obj object.Object, expected bool) bool {
 
 	if result.Value != expected {
 		t.Errorf("object has wrong value. got=%t, want=%t",
-		result.Value, expected)
+			result.Value, expected)
 		return false
 	}
 

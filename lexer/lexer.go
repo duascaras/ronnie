@@ -102,7 +102,7 @@ func (l *Lexer) NextToken() token.Token {
 }
 
 func (l *Lexer) readString() string {
-	position := l.position + 1 
+	position := l.position + 1
 	for {
 		l.readChar()
 		if l.ch == '"' || l.ch == 0 {
@@ -113,8 +113,8 @@ func (l *Lexer) readString() string {
 	return l.input[position:l.position]
 }
 
-func (l *Lexer) readIdentifier() string { 
-	// Reads an identifier and advances the lexer positions 
+func (l *Lexer) readIdentifier() string {
+	// Reads an identifier and advances the lexer positions
 	// until it encounters a non-letter-character.
 	position := l.position
 	for isLetter(l.ch) {
@@ -125,7 +125,7 @@ func (l *Lexer) readIdentifier() string {
 
 func isLetter(ch byte) bool {
 	// Treating "_" as a letter
-	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_' 
+	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
 }
 
 func newToken(tokenType token.TokenType, ch byte) token.Token {

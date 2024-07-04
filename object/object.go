@@ -11,16 +11,16 @@ import (
 type ObjectType string
 
 const (
-	ERROR_OBJ		 	= "ERROR"
-	INTEGER_OBJ 		= "INTEGER"
-	STRING_OBJ 			= "STRING"
-	BOOLEAN_OBJ 		= "BOOLEAN"
-	NULL_OBJ 			= "NULL"
-	RETURN_VALUE_OBJ 	= "RETURN_VALUE"
-	FUNCTION_OBJ	 	= "FUNCTION"
-	BUILTIN_OBJ			= "BUILTIN"
-	ARRAY_OBJ			= "ARRAY"
-	HASH_OBJ			= "HASH"
+	ERROR_OBJ        = "ERROR"
+	INTEGER_OBJ      = "INTEGER"
+	STRING_OBJ       = "STRING"
+	BOOLEAN_OBJ      = "BOOLEAN"
+	NULL_OBJ         = "NULL"
+	RETURN_VALUE_OBJ = "RETURN_VALUE"
+	FUNCTION_OBJ     = "FUNCTION"
+	BUILTIN_OBJ      = "BUILTIN"
+	ARRAY_OBJ        = "ARRAY"
+	HASH_OBJ         = "HASH"
 )
 
 type Object interface {
@@ -33,20 +33,20 @@ type Error struct {
 }
 
 func (e *Error) Type() ObjectType { return ERROR_OBJ }
-func (e *Error) Inspect() string { return "ERROR: " + e.Message}
+func (e *Error) Inspect() string  { return "ERROR: " + e.Message }
 
 type Integer struct {
 	Value int64
 }
 
-func (i *Integer) Inspect() string { return fmt.Sprintf("%d", i.Value)}
+func (i *Integer) Inspect() string  { return fmt.Sprintf("%d", i.Value) }
 func (i *Integer) Type() ObjectType { return INTEGER_OBJ }
 
 type String struct {
 	Value string
 }
 
-func (s *String) Inspect() string { return s.Value }
+func (s *String) Inspect() string  { return s.Value }
 func (s *String) Type() ObjectType { return STRING_OBJ }
 
 type Boolean struct {
@@ -54,25 +54,24 @@ type Boolean struct {
 }
 
 func (b *Boolean) Type() ObjectType { return BOOLEAN_OBJ }
-func (b *Boolean) Inspect() string { return fmt.Sprintf("%t", b.Value)}
+func (b *Boolean) Inspect() string  { return fmt.Sprintf("%t", b.Value) }
 
-type Null struct { }
+type Null struct{}
 
 func (n *Null) Type() ObjectType { return NULL_OBJ }
-func (n *Null) Inspect() string { return "null" }
+func (n *Null) Inspect() string  { return "null" }
 
 type ReturnValue struct {
 	Value Object
 }
 
 func (rv *ReturnValue) Type() ObjectType { return RETURN_VALUE_OBJ }
-func (rv *ReturnValue) Inspect() string { return rv.Value.Inspect() }
+func (rv *ReturnValue) Inspect() string  { return rv.Value.Inspect() }
 
 type Function struct {
-	Parameters 	[]*ast.Identifier
-	Body		*ast.BlockStatement
-	Env			*Environment	
-
+	Parameters []*ast.Identifier
+	Body       *ast.BlockStatement
+	Env        *Environment
 }
 
 func (f *Function) Type() ObjectType { return FUNCTION_OBJ }
@@ -101,7 +100,7 @@ type Builtin struct {
 }
 
 func (b *Builtin) Type() ObjectType { return BUILTIN_OBJ }
-func (b *Builtin) Inspect() string { return "builtin function" }
+func (b *Builtin) Inspect() string  { return "builtin function" }
 
 type Array struct {
 	Elements []Object
@@ -124,8 +123,8 @@ func (ao *Array) Inspect() string {
 }
 
 type HashKey struct {
-	Type 	ObjectType
-	Value 	uint64
+	Type  ObjectType
+	Value uint64
 }
 
 func (b *Boolean) HashKey() HashKey {
@@ -153,12 +152,12 @@ func (s *String) HashKey() HashKey {
 }
 
 type HashPair struct {
-	Key 	Object
-	Value 	Object
+	Key   Object
+	Value Object
 }
 
 type Hash struct {
-	Pairs 	map[HashKey]HashPair
+	Pairs map[HashKey]HashPair
 }
 
 func (h *Hash) Type() ObjectType { return HASH_OBJ }
@@ -168,7 +167,7 @@ func (h *Hash) Inspect() string {
 
 	for _, pair := range h.Pairs {
 		pairs = append(pairs, fmt.Sprintf("%s: %s",
-		pair.Key.Inspect(), pair.Value.Inspect()))
+			pair.Key.Inspect(), pair.Value.Inspect()))
 	}
 
 	out.WriteString("{")
@@ -179,5 +178,5 @@ func (h *Hash) Inspect() string {
 }
 
 type Hashable interface {
-	HashKey() 	HashKey
+	HashKey() HashKey
 }
